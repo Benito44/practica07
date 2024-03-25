@@ -31,6 +31,8 @@ class AuthenticatedSessionController extends Controller
 
         if ($failedAttempts >= 2) {
             // Si se excede el límite de intentos fallidos, redirigir a la vista con el captcha
+                    // Limpiar los intentos fallidos de inicio de sesión
+        Session::forget('login_failed_attempts');
             return redirect()->route('captcha.show');
         }
 
@@ -42,8 +44,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->back()->withErrors(['email' => __('auth.failed')]);
         }
 
-        // Limpiar los intentos fallidos de inicio de sesión
-        Session::forget('login_failed_attempts');
+
 
         // Regenerar el token de sesión
         $request->session()->regenerateToken();
