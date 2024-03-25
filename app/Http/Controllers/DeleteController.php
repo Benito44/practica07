@@ -10,18 +10,19 @@ class DeleteController extends Controller
 {    
     /**
      * index
-     *
+     * Mostrar els articles propis de l'usuari i obtenir els ids d'aquests per l'eliminació
      * @return void
      */
     public function index()
     {
-    // Obtener el ID del usuario logeado
+    
     $userId = Auth::id();
 
-    // Obtener todos los IDs de los proyectos del usuario
+    // Obtenir els ids dels articles propis de l'usuari
     $proyectos = Projecte::where('id_usuari', $userId)->pluck('id');
+    // Obtenir els projectes de l'usuari
     $portafoli = Projecte::where('id_usuari', $userId)->paginate(1);
-    // Pasar los IDs a la vista
+    
     return view('delete', ['proyectos' => $proyectos, 'portafoli' => $portafoli]);    
 }
     
@@ -35,7 +36,7 @@ class DeleteController extends Controller
 public function delete(Request $request)
 {
 
-    // Actualizar los datos del proyecto
+    // Obtenir l'id de l'articles
     $proyecto_id = $request->proyecto_id;
 
     $proyecto = Projecte::find($proyecto_id);

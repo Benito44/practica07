@@ -1,7 +1,0 @@
-    <!--
-    @if ($missatge){
-        {{$missatge}}
-    } @else {
-        {{'Insertar projecte'}}
-    }
--->

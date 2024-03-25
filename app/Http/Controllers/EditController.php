@@ -7,20 +7,30 @@ use App\Models\Projecte;
 use Illuminate\Support\Facades\Auth;
 
 class EditController extends Controller
-{
+{    
+    /**
+     * index
+     * Obtenir els articles i els ids dels articles de l'usuari
+     * @return void
+     */
     public function index()
     {
-    // Obtener el ID del usuario logeado
+    
     $userId = Auth::id();
 
-    // Obtener todos los IDs de los proyectos del usuario
     $proyectos = Projecte::where('id_usuari', $userId)->pluck('id');
     $portafoli = Projecte::where('id_usuari', $userId)->paginate(1);
-    // Pasar los IDs a la vista
+    
     return view('edit', ['proyectos' => $proyectos, 'portafoli' => $portafoli]);    
 }
     
 
+/**
+ * update
+ * Validar les dades del formulari i editar les dades de l'article
+ * @param  mixed $request
+ * @return void
+ */
 public function update(Request $request)
 {
     // Validar los datos del formulario
@@ -29,7 +39,7 @@ public function update(Request $request)
         'descripcion' => 'required',
     ]);
 
-    // Actualizar los datos del proyecto
+    // Obtenir l'id de l'articles
     $proyecto_id = $request->proyecto_id;
 
     $proyecto = Projecte::find($proyecto_id);
@@ -38,7 +48,7 @@ public function update(Request $request)
     $proyecto->descripcio = $request->descripcion;
     $proyecto->save();
 
-    // Redireccionar con un mensaje de éxito
+    
     return redirect()->route('dashboard')->with('success', 'Proyecto actualizado correctamente');
 }
 

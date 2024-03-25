@@ -6,8 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    
     /**
-     * Run the migrations.
+     * up
+     * Crear la taula d'usuaris amb el nom, l'email i la contrasenya encriptada
+     * @return void
      */
     public function up(): void
     {
@@ -22,9 +25,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('users');

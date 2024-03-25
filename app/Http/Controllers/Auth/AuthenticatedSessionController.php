@@ -13,25 +13,31 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
+    
     /**
-     * Display the login view.
+     * create
+     * Retorna la vista del login
+     * @return View
      */
     public function create(): View
     {
         return view('auth.login');
     }
 
+    
     /**
-     * Handle an incoming authentication request.
+     * store
+     * Funció per contar els errors d'inici de sessió erronis i quan
+     * pasi de 3 errors mostrar el reCaptcha
+     * @param  mixed $request
+     * @return RedirectResponse
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // Verificar el número de intentos fallidos de inicio de sesión
+
         $failedAttempts = Session::get('login_failed_attempts', 0);
 
         if ($failedAttempts >= 2) {
-            // Si se excede el límite de intentos fallidos, redirigir a la vista con el captcha
-                    // Limpiar los intentos fallidos de inicio de sesión
         Session::forget('login_failed_attempts');
             return redirect()->route('captcha.show');
         }
@@ -52,8 +58,12 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
+    
     /**
-     * Destroy an authenticated session.
+     * destroy
+     * Funció per tancar la sessió
+     * @param  mixed $request
+     * @return RedirectResponse
      */
     public function destroy(Request $request): RedirectResponse
     {

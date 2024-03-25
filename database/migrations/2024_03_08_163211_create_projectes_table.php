@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
+    
     /**
-     * Run the migrations.
+     * up
+     * Crear la taula dels articles amb el titol, la descripció
+     * i una foreign key que fa referencia als ids dels usuaris
+     * @return void
      */
     public function up(): void
     {

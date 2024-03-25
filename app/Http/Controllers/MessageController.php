@@ -7,7 +7,14 @@ use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
-        
+            
+    /**
+     * store
+     * Funció per validar el formulari de creació d'article, 
+     * afegir-lo a la taula de projectes i redireccionar a la vista principal
+     * @param  mixed $request
+     * @return void
+     */
     public function store(Request $request){
        
         $idUsuario = Auth::id();
@@ -21,8 +28,8 @@ class MessageController extends Controller
                 $projecte->descripcio = $validatedData['content'];
                 $projecte->id_usuari = $idUsuario;
                 $projecte->save();
-                $missatge = "Insertado el projecte ";
-                return view('new');
+                
+                return redirect()->route('dashboard');
 
 }
 }
