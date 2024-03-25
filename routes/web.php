@@ -7,7 +7,7 @@ use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\EditController;
-
+use App\Http\Controllers\DeleteController;
 
 
 
@@ -47,5 +47,9 @@ Route::post('new', [MessageController::class, 'store']);
 Route::view('/edit', 'edit')->name('edit');
 Route::get('edit', [EditController::class, 'index'])->name('index');
 Route::put('/proyecto', [EditController::class, 'update'])->name('update');
+
+Route::view('/delete', 'delete')->name('delete');
+Route::get('delete', [DeleteController::class, 'index'])->name('index');
+Route::delete('/proyecto', [DeleteController::class, 'delete'])->name('delete');
 
 require __DIR__.'/auth.php';
