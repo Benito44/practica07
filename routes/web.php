@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\DeleteController;
-
+use App\Http\Controllers\CaptchaController;
 
 
 /*
@@ -26,6 +26,10 @@ use App\Http\Controllers\DeleteController;
 Route::view('/', 'welcome')->name('welcome');
 Route::get('/', [PortfoliControllerWelcome::class,'index']);
 Route::view('/dashboard', 'dashboard')->name('dashboard');
+
+Route::view('/captcha', 'captcha')->name('captcha');
+Route::get('/captcha', [CaptchaController::class, 'show'])->name('captcha.show');
+Route::post('captcha', [CaptchaController::class, 'store'])->name('captcha.store');
 
 Route::get('/dashboard', [DashBoardController::class, 'index'])
     ->middleware(['auth', 'verified'])
