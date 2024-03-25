@@ -6,6 +6,7 @@ use App\Http\Controllers\PortfoliControllerWelcome;
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\EditController;
 
 
 
@@ -42,5 +43,9 @@ Route::middleware('auth')->group(function () {
 });
 Route::view('/new', 'new')->name('new');
 Route::post('new', [MessageController::class, 'store']);
+
+Route::view('/edit', 'edit')->name('edit');
+Route::get('edit', [EditController::class, 'index'])->name('index');
+Route::put('/proyecto', [EditController::class, 'update'])->name('update');
 
 require __DIR__.'/auth.php';
