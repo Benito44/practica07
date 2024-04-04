@@ -9,7 +9,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\CaptchaController;
-
+use App\Http\Controllers\Auth\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,7 @@ use App\Http\Controllers\CaptchaController;
 Route::view('/', 'welcome')->name('welcome');
 Route::get('/', [PortfoliControllerWelcome::class,'index']);
 Route::view('/dashboard', 'dashboard')->name('dashboard');
+ 
 
 Route::view('/captcha', 'captcha')->name('captcha');
 Route::get('/captcha', [CaptchaController::class, 'show'])->name('captcha.show');
@@ -55,5 +56,8 @@ Route::put('/proyecto', [EditController::class, 'update'])->name('update');
 Route::view('/delete', 'delete')->name('delete');
 Route::get('delete', [DeleteController::class, 'index'])->name('index');
 Route::delete('/proyecto', [DeleteController::class, 'delete'])->name('delete');
+
+Route::get('/auth/{provider}/redirect', [ProviderController::class, 'redirect']);
+Route::get('/auth/{provider}/callback', [ProviderController::class, 'callback']);
 
 require __DIR__.'/auth.php';
