@@ -30,10 +30,13 @@
                     @endauth
                 </div>
             @endif
+            <h1>Articles anónims</h1>
             <ul>
                 @forelse($portafoli as $portfoliItem) 
-                <li>{{ $portfoliItem->id }}</li>     
-                    <li>{{ $portfoliItem->titol }}</li>      
+                         
+                    <li>Titol de l'article: {{ $portfoliItem->titol }}</li>
+                    <li>Descripció: {{ $portfoliItem->descripcio }}</li>         
+                    <br>
                 @empty
                     <li>Cap projecte a mostrar!!!</li>
                 @endforelse
