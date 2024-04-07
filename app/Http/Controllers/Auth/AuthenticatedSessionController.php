@@ -34,27 +34,24 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-
         $failedAttempts = Session::get('login_failed_attempts', 0);
-
+    
         if ($failedAttempts >= 2) {
-        Session::forget('login_failed_attempts');
+            Session::forget('login_failed_attempts');
             return redirect()->route('captcha.show');
         }
-
+    
         // Autenticar al usuario
         if (!Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
             // Incrementar el contador de intentos fallidos
             Session::put('login_failed_attempts', $failedAttempts + 1);
-
-            return redirect()->back()->withErrors(['email' => __('auth.failed')]);
+    
+            return redirect()->back()->withErrors(['email' => __('auth.failed')])->withInput($request->only('email'));
         }
-
-
-
+    
         // Regenerar el token de sesión
         $request->session()->regenerateToken();
-
+    
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
