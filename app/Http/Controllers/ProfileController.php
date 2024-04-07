@@ -12,7 +12,10 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * edit
+     * Funció per editar el nom de l'usuari
+     * @param  mixed $request
+     * @return View
      */
     public function edit(Request $request): View
     {
@@ -20,9 +23,12 @@ class ProfileController extends Controller
             'user' => $request->user(),
         ]);
     }
-
+    
     /**
-     * Update the user's profile information.
+     * update
+     * Funció per editar el correu de l'usuari
+     * @param  mixed $request
+     * @return RedirectResponse
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
@@ -38,7 +44,10 @@ class ProfileController extends Controller
     }
 
     /**
-     * Delete the user's account.
+     * destroy
+     * Eliminar la compte de l'usuari
+     * @param  mixed $request
+     * @return RedirectResponse
      */
     public function destroy(Request $request): RedirectResponse
     {
